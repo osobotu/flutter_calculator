@@ -10,12 +10,17 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     on<DigitTappedEvent>(_onDigitTapped);
     on<CalculatorResetEvent>(_onCalculatorReset);
     on<OperationTappedEvent>(_onOperationTapped);
+    on<CalculateResultEvent>(_onCalculatorResult);
   }
 
   void _onDigitTapped(DigitTappedEvent event, Emitter<CalculatorState> emit) {
     if (state.operation == Operation.none) {
       String lhs = state.leftOperand;
-      emit(CalculatorTyping(leftOperand: lhs += event.digit));
+      emit(state.copyWith(leftOperand: lhs += event.digit));
+    }
+    if (state.operation != Operation.none) {
+      String rhs = state.rightOperand;
+      emit(state.copyWith(rightOperand: rhs += event.digit));
     }
   }
 
@@ -26,6 +31,30 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
 
   void _onOperationTapped(
       OperationTappedEvent event, Emitter<CalculatorState> emit) {
-    emit(CalculatorTyping(operation: event.operation));
+    emit(state.copyWith(operation: event.operation));
+  }
+
+  void _onCalculatorResult(
+      CalculateResultEvent event, Emitter<CalculatorState> emit) {
+    final double lhs = double.parse(state.leftOperand);
+    final double rhs = double.parse(state.rightOperand);
+    double result = 0;
+    switch (state.operation) {
+      case Operation.none:
+        break;
+      case Operation.add:
+        result = lhs + rhs;
+        break;
+      case Operation.subtract:
+        result = lhs - rhs;
+        break;
+      case Operation.multiply:
+        result = lhs * rhs;
+        break;
+      case Operation.divide:
+        result = lhs / rhs;
+        break;
+    }
+    emit(state.copyWith(result: result.toStringAsFixed(1)));
   }
 }

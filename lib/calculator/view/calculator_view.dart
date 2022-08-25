@@ -18,19 +18,20 @@ class CalculatorView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (state is CalculatorInitial)
+              if (state is CalculatorInitial ||
+                  (state.operation != Operation.none && state.result != '0'))
                 Text(
                   state.result,
                   style: textTheme.headline3!.copyWith(color: Colors.white),
                 ),
-              if (state is CalculatorTyping &&
-                  state.operation == Operation.none)
+              if (state.leftOperand.isNotEmpty && state.rightOperand.isEmpty)
                 Text(
                   state.leftOperand,
                   style: textTheme.headline3!.copyWith(color: Colors.white),
                 ),
-              if (state is CalculatorTyping &&
-                  state.operation != Operation.none)
+              if (state.rightOperand.isNotEmpty &&
+                  state.operation != Operation.none &&
+                  state.result == '0')
                 Text(
                   state.rightOperand,
                   style: textTheme.headline3!.copyWith(color: Colors.white),
@@ -77,6 +78,27 @@ class CalculatorView extends StatelessWidget {
                   OperatorButton(
                     operation: Operation.divide,
                   ),
+                  GestureDetector(
+                    onTap: () => context.read<CalculatorBloc>()
+                      ..add(CalculateResultEvent()),
+                    child: Container(
+                      height: 70,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(35),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "eq",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               )
             ],
