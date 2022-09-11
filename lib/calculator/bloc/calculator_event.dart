@@ -5,7 +5,7 @@ abstract class CalculatorEvent {}
 
 class DigitTappedEvent extends CalculatorEvent {
   DigitTappedEvent(this.digit);
-  final String digit;
+  final int digit;
 }
 
 class OperationTappedEvent extends CalculatorEvent {
