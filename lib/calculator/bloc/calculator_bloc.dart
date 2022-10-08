@@ -90,16 +90,37 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
 
   void _onPercentageTapped(
       PercentageTappedEvent event, Emitter<CalculatorState> emit) {
-    if (state.operation == Operation.none) {
-      final lhs = double.parse(state.leftOperand);
-      final result = lhs / 100.0;
-      emit(
-        state.copyWith(
-          result: parseResult(result.toString()),
-          leftOperand: result.toString(),
-          status: CalculatorStatus.done,
-        ),
-      );
+    if (state.status == CalculatorStatus.leftOperandTyping) {
+      if (state.leftOperand.isNotEmpty) {
+        final lhs = double.parse(state.leftOperand);
+        final value = lhs / 100.0;
+        emit(
+          state.copyWith(
+            result: parseResult(value.toString()),
+            leftOperand: value.toString(),
+            status: CalculatorStatus.done,
+          ),
+        );
+      }
+    } else {
+      if (state.rightOperand.isEmpty) {
+        final result = double.parse(state.result);
+
+        final value = result / 100.0;
+        emit(
+          state.copyWith(
+            result: parseResult(value.toString()),
+          ),
+        );
+      } else {
+        final rhs = double.parse(state.rightOperand);
+        final value = rhs / 100.0;
+        emit(
+          state.copyWith(
+            result: parseResult(value.toString()),
+          ),
+        );
+      }
     }
   }
 
