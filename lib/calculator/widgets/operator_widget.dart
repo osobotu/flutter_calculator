@@ -16,6 +16,7 @@ class OperatorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     String text = '';
+    // Widget icon = Icon(Icons)
     switch (operation) {
       case Operation.add:
         {
@@ -25,13 +26,13 @@ class OperatorButton extends StatelessWidget {
       case Operation.none:
         break;
       case Operation.subtract:
-        text = '-';
+        text = '−';
         break;
       case Operation.multiply:
-        text = 'x';
+        text = '×';
         break;
       case Operation.divide:
-        text = '/';
+        text = '÷';
         break;
     }
     return GestureDetector(

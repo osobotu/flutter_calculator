@@ -2,22 +2,22 @@ part of 'calculator_bloc.dart';
 
 class CalculatorState extends Equatable {
   CalculatorState({
-    this.leftOperand = 0,
+    this.leftOperand = '',
     this.operation = Operation.none,
-    this.result = 0,
-    this.rightOperand = 0,
+    this.result = '0',
+    this.rightOperand = '',
     this.status = CalculatorStatus.initial,
   });
-  final double result;
-  final double leftOperand;
-  final double rightOperand;
+  final String result;
+  final String leftOperand;
+  final String rightOperand;
   final Operation operation;
   final CalculatorStatus status;
 
   CalculatorState copyWith({
-    double? result,
-    double? leftOperand,
-    double? rightOperand,
+    String? result,
+    String? leftOperand,
+    String? rightOperand,
     Operation? operation,
     CalculatorStatus? status,
   }) {

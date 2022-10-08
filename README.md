@@ -9,9 +9,7 @@ To run this project, your machine must be configured to run flutter apps [Get st
 If your machine is setup
 
 - Download or clone the repo
-- get the required packages
+- get the required packages using `flutter pub get`
 - run the project
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots

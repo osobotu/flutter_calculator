@@ -17,6 +17,14 @@ class DecimalTappedEvent extends CalculatorEvent {
   DecimalTappedEvent();
 }
 
+class PercentageTappedEvent extends CalculatorEvent {
+  PercentageTappedEvent();
+}
+
+class PlusMinusTappedEvent extends CalculatorEvent {
+  PlusMinusTappedEvent();
+}
+
 class CalculateResultEvent extends CalculatorEvent {
   CalculateResultEvent();
 }

@@ -14,8 +14,6 @@ class CalculatorView extends StatelessWidget {
         backgroundColor: Colors.black,
         body: BlocBuilder<CalculatorBloc, CalculatorState>(
             builder: (context, state) {
-          final isLeftHandTyping =
-              state.status == CalculatorStatus.leftOperandTyping;
           return Padding(
             padding: const EdgeInsets.all(0),
             child: Center(
@@ -24,11 +22,13 @@ class CalculatorView extends StatelessWidget {
                 children: [
                   if (state.status == CalculatorStatus.initial ||
                       state.status == CalculatorStatus.done)
-                    _DisplayText(text: state.result.toString()),
+                    _DisplayText(
+                      text: state.result,
+                    ),
                   if (state.status == CalculatorStatus.leftOperandTyping)
-                    _DisplayText(text: state.leftOperand.toStringAsFixed(0)),
+                    _DisplayText(text: state.leftOperand),
                   if (state.status == CalculatorStatus.rightOperandTyping)
-                    _DisplayText(text: state.rightOperand.toStringAsFixed(0)),
+                    _DisplayText(text: state.rightOperand),
                   Expanded(
                     flex: 3,
                     child: Container(
@@ -49,10 +49,16 @@ class CalculatorView extends StatelessWidget {
                               Button(
                                 text: '+/-',
                                 backgroundColor: Color(0xFFA8A6A3),
+                                onTap: () => context
+                                    .read<CalculatorBloc>()
+                                    .add(PlusMinusTappedEvent()),
                               ),
                               Button(
                                 text: '%',
                                 backgroundColor: Color(0xFFA8A6A3),
+                                onTap: () => context
+                                    .read<CalculatorBloc>()
+                                    .add(PercentageTappedEvent()),
                               ),
                               OperatorButton(
                                 isSelected:
@@ -169,7 +175,12 @@ class CalculatorView extends StatelessWidget {
                                     .read<CalculatorBloc>()
                                     .add(DigitTappedEvent(0)),
                               ),
-                              Button(text: '.'),
+                              Button(
+                                text: '.',
+                                onTap: () => context
+                                    .read<CalculatorBloc>()
+                                    .add(DecimalTappedEvent()),
+                              ),
                               Button(
                                 text: '=',
                                 backgroundColor: Colors.orange,
