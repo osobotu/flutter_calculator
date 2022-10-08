@@ -1,16 +1,15 @@
 # flutter_calculator
 
-A new Flutter project.
+Flutter Calculator is a replica of the default iOS calculator.
 
-## Getting Started
+## Setup
 
-This project is a starting point for a Flutter application.
+To run this project, your machine must be configured to run flutter apps [Get started here](https://docs.flutter.dev/)
 
-A few resources to get you started if this is your first Flutter project:
+If your machine is setup
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Download or clone the repo
+- get the required packages using `flutter pub get`
+- run the project
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
